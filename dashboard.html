@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jisoo Services & Storage - Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: #f5f7fa;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+            line-height: 1.2;
+        }
+        
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .username {
+            color: #555;
+        }
+        
+        .logout-btn {
+            background-color: transparent;
+            color: #e74c3c;
+            border: 1px solid #e74c3c;
+            border-radius: 4px;
+            padding: 0.4rem 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .logout-btn:hover {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .dashboard-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+        }
+        
+        .table-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        thead {
+            background-color: #f8f9fa;
+        }
+        
+        th {
+            text-align: left;
+            padding: 1rem;
+            font-weight: 600;
+            color: #495057;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #e9ecef;
+            color: #212529;
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .login-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #3498db;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .login-link:hover {
+            background-color: #2980b9;
+            transform: scale(1.1);
+        }
+        
+        .connect-soon {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .disabled {
+            background-color: #95a5a6;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        
+        .soon-label {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+        
+        .search-bar {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 0.7rem;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+            font-size: 1rem;
+        }
+        
+        .search-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            padding: 0 1rem;
+            cursor: pointer;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: #7f8c8d;
+            font-size: 0.8rem;
+        }
+        
+        /* Flag icons */
+        .country-cell {
+            display: flex;
+            align-items: center;
+        }
+        
+        .flag-icon {
+            width: 24px;
+            height: 16px;
+            margin-right: 8px;
+            vertical-align: middle;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            Jisoo<br>Services & Storage
+        </div>
+        <div class="user-menu">
+            <span class="username" id="userDisplay">Welcome, User</span>
+            <button class="logout-btn" id="logoutBtn">Logout</button>
+        </div>
+    </header>
+    
+    <div class="container">
+        <h2 class="dashboard-title">PBX Dashboard</h2>
+        
+        <div class="search-bar">
+            <input type="text" class="search-input" placeholder="Search PBX...">
+            <button class="search-btn">🔍</button>
+        </div>
+        
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>PBX Name</th>
+                        <th>Country</th>
+                        <th>Connect</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>JisooUAE</td>
+                        <td class="country-cell">
+                            <span class="flag-icon">🇦🇪</span> UAE
+                        </td>
+                        <td>
+                            <a href="http://46.101.251.46/" class="login-link" title="Log in to JisooUAE" target="_blank">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M21 15c0-4.625-3.51-8.45-8-8.95V4.25C13 3.56 12.44 3 11.75 3s-1.25.56-1.25 1.25V6.05C5.51 6.55 2 10.38 2 15v3c0 .55.45 1 1 1h3.5c.55 0 1 .45 1 1s.45 1 1 1h8c.55 0 1-.45 1-1s.45-1 1-1H22c.55 0 1-.45 1-1v-3zm-2 2H5v-2c0-3.53 2.61-6.43 6-6.92V9.5c0 .55.45 1 1 1s1-.45 1-1V8.08c3.39.49 6 3.39 6 6.92v2z"/>
+                                    <path d="M14 1c-2.76 0-5 2.24-5 5h2c0-1.66 1.34-3 3-3s3 1.34 3 3h2c0-2.76-2.24-5-5-5z"/>
+                                </svg>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Jisoo3</td>
+                        <td class="country-cell">
+                            <span class="flag-icon">🇸🇦</span> Saudi Arabia
+                        </td>
+                        <td>
+                            <div class="connect-soon">
+                                <span class="login-link disabled" title="Coming soon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M21 15c0-4.625-3.51-8.45-8-8.95V4.25C13 3.56 12.44 3 11.75 3s-1.25.56-1.25 1.25V6.05C5.51 6.55 2 10.38 2 15v3c0 .55.45 1 1 1h3.5c.55 0 1 .45 1 1s.45 1 1 1h8c.55 0 1-.45 1-1s.45-1 1-1H22c.55 0 1-.45 1-1v-3zm-2 2H5v-2c0-3.53 2.61-6.43 6-6.92V9.5c0 .55.45 1 1 1s1-.45 1-1V8.08c3.39.49 6 3.39 6 6.92v2z"/>
+                                        <path d="M14 1c-2.76 0-5 2.24-5 5h2c0-1.66 1.34-3 3-3s3 1.34 3 3h2c0-2.76-2.24-5-5-5z"/>
+                                    </svg>
+                                </span>
+                                <span class="soon-label">soon</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Jisoo5</td>
+                        <td class="country-cell">
+                            <span class="flag-icon">🇸🇦</span> Saudi Arabia
+                        </td>
+                        <td>
+                            <a href="http://46.101.251.46:5080/" class="login-link" title="Log in to Jisoo5" target="_blank">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M21 15c0-4.625-3.51-8.45-8-8.95V4.25C13 3.56 12.44 3 11.75 3s-1.25.56-1.25 1.25V6.05C5.51 6.55 2 10.38 2 15v3c0 .55.45 1 1 1h3.5c.55 0 1 .45 1 1s.45 1 1 1h8c.55 0 1-.45 1-1s.45-1 1-1H22c.55 0 1-.45 1-1v-3zm-2 2H5v-2c0-3.53 2.61-6.43 6-6.92V9.5c0 .55.45 1 1 1s1-.45 1-1V8.08c3.39.49 6 3.39 6 6.92v2z"/>
+                                    <path d="M14 1c-2.76 0-5 2.24-5 5h2c0-1.66 1.34-3 3-3s3 1.34 3 3h2c0-2.76-2.24-5-5-5z"/>
+                                </svg>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Jisoo7</td>
+                        <td class="country-cell">
+                            <span class="flag-icon">🇸🇦</span> Saudi Arabia
+                        </td>
+                        <td>
+                            <a href="http://46.101.251.46:3000/" class="login-link" title="Log in to Jisoo7" target="_blank">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M21 15c0-4.625-3.51-8.45-8-8.95V4.25C13 3.56 12.44 3 11.75 3s-1.25.56-1.25 1.25V6.05C5.51 6.55 2 10.38 2 15v3c0 .55.45 1 1 1h3.5c.55 0 1 .45 1 1s.45 1 1 1h8c.55 0 1-.45 1-1s.45-1 1-1H22c.55 0 1-.45 1-1v-3zm-2 2H5v-2c0-3.53 2.61-6.43 6-6.92V9.5c0 .55.45 1 1 1s1-.45 1-1V8.08c3.39.49 6 3.39 6 6.92v2z"/>
+                                    <path d="M14 1c-2.76 0-5 2.24-5 5h2c0-1.66 1.34-3 3-3s3 1.34 3 3h2c0-2.76-2.24-5-5-5z"/>
+                                </svg>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        &copy; 2025 Jisoo Services & Storage. All rights reserved.
+    </footer>
+
+    <script>
+        // בדיקה אם המשתמש מחובר
+        window.addEventListener('load', function() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            
+            // אם המשתמש לא מחובר, החזר אותו לדף הלוגין
+            if (!isLoggedIn || isLoggedIn !== 'true') {
+                window.location.href = 'index.html';
+                return;
+            }
+            
+            // הצגת שם המשתמש בדף
+            const username = localStorage.getItem('username');
+            if (username) {
+                document.getElementById('userDisplay').textContent = `Welcome, ${username}`;
+            }
+        });
+        
+        // פונקצית התנתקות
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            // מחיקת נתוני ההתחברות
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('username');
+            
+            // החזרה לדף הלוגין
+            window.location.href = 'index.html';
+        });
+        
+        // פונקציית חיפוש בטבלה
+        document.querySelector('.search-btn').addEventListener('click', function() {
+            const searchTerm = document.querySelector('.search-input').value.toLowerCase();
+            const rows = document.querySelectorAll('tbody tr');
+            
+            rows.forEach(row => {
+                const pbxName = row.cells[0].textContent.toLowerCase();
+                const country = row.cells[1].textContent.toLowerCase();
+                
+                if (pbxName.includes(searchTerm) || country.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+        
+        // חיפוש בזמן הקלדה
+        document.querySelector('.search-input').addEventListener('keyup', function() {
+            document.querySelector('.search-btn').click();
+        });
+    </script>
+</body>
+</html>
