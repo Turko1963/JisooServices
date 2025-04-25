@@ -1,4 +1,3 @@
-// backend.php - This file would be on your server
 <?php
 session_start();
 
