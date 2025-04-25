@@ -3,7 +3,7 @@ session_start();
 
 // This should be stored securely, ideally in a database
 $valid_credentials = [
-    'admin' => password_hash('admin123', PASSWORD_DEFAULT) // Store hashed passwords!
+    'admin' => '$2y$10$Tp6DREomFS26chUSdBzyKuRuDwRCFtG2DYdi1RkL93SDuD7lK/mES' // pre-generated!
 ];
 
 // Handle login request
