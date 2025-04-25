@@ -1,0 +1,9 @@
+name: urchin-app
+services:
+- name: jisooservices
+  github:
+    repo: Turko1963/JisooServices
+    branch: main
+  buildCommand: null
+  runCommand: heroku-php-apache2
+  httpPort: 8080
