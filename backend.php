@@ -11,13 +11,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
 
+    // Log the posted data for debugging (delete this line in production)
+    file_put_contents('debug_log.txt', print_r($_POST, true));
+
     $response = ['success' => false];
 
-    // Check credentials
+    // Check if the username exists and password is valid
     if (isset($valid_credentials[$username]) &&
         password_verify($password, $valid_credentials[$username])) {
 
-        session_regenerate_id(true); // Prevent session fixation
+        session_regenerate_id(true); // Protect against session fixation
         $_SESSION['isLoggedIn'] = true;
         $_SESSION['username'] = $username;
 
@@ -32,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 
-// Handle session status check
+// Handle session check (GET request with ?check_auth=1)
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['check_auth'])) {
     $response = [
         'isLoggedIn' => isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'],
@@ -44,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['check_auth'])) {
     exit;
 }
 
-// Handle logout
+// Handle logout (GET request with ?logout=1)
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['logout'])) {
     $_SESSION = [];
     session_destroy();
@@ -53,4 +56,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['logout'])) {
     exit;
 }
 ?>
-
