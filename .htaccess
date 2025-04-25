@@ -1,0 +1,14 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Handle PHP files directly
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^(.+\.php)$ $1 [L]
+    
+    # Serve static files directly
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^ - [L]
+    
+    # Redirect any other requests to index.html
+    RewriteRule ^ index.html [L]
+</IfModule>
